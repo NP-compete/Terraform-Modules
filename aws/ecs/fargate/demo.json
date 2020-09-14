@@ -1,0 +1,44 @@
+[
+    {
+      "name": "${container_name}",
+      "image": "${container_image}",
+      "essential": true,
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": ${container_port},
+          "hostPort": ${container_port}
+        }
+      ],
+      "environment": [
+        {
+          "name": "PORT",
+          "value": "${container_port}"
+        },
+        {
+          "name": "HEALTHCHECK",
+          "value": "${health_check}"
+        },
+        {
+          "name": "ENABLE_LOGGING",
+          "value": "false"
+        },
+        {
+          "name": "PRODUCT",
+          "value": "${app}"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "${environment}"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fargate/${app}-${environment}",
+          "awslogs-region": "${region}",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
