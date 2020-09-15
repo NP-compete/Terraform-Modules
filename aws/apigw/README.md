@@ -179,6 +179,9 @@
 | vpc\_link\_descriptions | The description of the VPC link. | list | `<list>` | no |
 | vpc\_link\_names | The name used to label and identify the VPC link. | list | `<list>` | no |
 | xray\_tracing\_enabled | A mapping of tags to assign to the resource. | list | `<list>` | no |
+| create\_role | Boolean to set to true, if roles are to be created | bool | `false` | no |
+| cloudwatchRole | The role to be used if  `create\_role` is set to false | string | "" | no |
+| tags | The list of tags to attach to the resources | map | {} | no |
 
 ## Outputs
 

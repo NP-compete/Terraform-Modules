@@ -10,6 +10,8 @@ resource "aws_api_gateway_rest_api" "default" {
   endpoint_configuration {
     types = var.types
   }
+
+  tags = var.tags
 }
 
 resource "aws_api_gateway_resource" "default" {
@@ -177,6 +179,7 @@ resource "aws_api_gateway_stage" "default" {
   documentation_version = length(var.documentation_versions) > 0 ? element(var.documentation_versions, count.index) : null
   variables             = length(var.stage_variables) > 0 ? element(var.stage_variables, count.index) : {}
   xray_tracing_enabled  = length(var.xray_tracing_enabled) > 0 ? element(var.xray_tracing_enabled, count.index) : false
+  tags                  = var.tags
 }
 
 resource "aws_api_gateway_stage" "with_log" {
