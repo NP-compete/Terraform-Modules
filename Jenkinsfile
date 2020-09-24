@@ -7,6 +7,7 @@ pipeline {
         string(name: 'StateLock', defaultValue: '', description: 'DynamoDB table to use to lock tfstate')
         string(name: 'Project', defaultValue: '', description: 'Project Name')
         string(name: 'Region', defaultValue: 'us-east-1', description: 'The AWS Region')
+        string(name: 'Backend', defaultValue: 'local', description: 'The backend to use with terraform')
         booleanParam(name: 'StaticAnalysis', defaultValue: false, description: 'Run static code analysis?')
   }
 
@@ -40,11 +41,22 @@ pipeline {
           sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
         }
       }
-      stage('4. Terraform init') {
+      stage('4.1 Terraform init - s3') {
+        when {
+          environment name: 'Backend', value: 's3'
+        }
         steps {
           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS Creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             sh 'terraform init -backend-config="bucket=${StateBucket}" -backend-config="key=${Project}/${environment}.tfstate" -backend-config="lock_table=${StateLock}"  -backend-config="region=us-east-1" -backend=true -force-copy -get=true -input=false'
           }
+        }
+      }
+      stage('4.2 Terraform init - local') {
+        when {
+          environment name: 'Backend', value: 'local'
+        }
+        steps {
+          sh 'terraform init -input=false'
         }
       }
       // stage('5. Validate Terraform code') {
@@ -54,9 +66,9 @@ pipeline {
       //   }
       // }
       // stage('6. Perform static Analysis') {
-      //   when {
-      //     environment name: 'StaticAnalysis', value: true
-      //   }
+        // when {
+        //   environment name: 'StaticAnalysis', value: true
+        // }
       //   steps {
       //     sh 'go get -u github.com/liamg/tfsec/cmd/tfsec'
       //     sh 'tfsec . --tfvars-file env/${environment}.tfvars'
