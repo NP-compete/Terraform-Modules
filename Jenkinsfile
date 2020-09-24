@@ -19,6 +19,7 @@
   // }
 
   // try{
+node {
       stage('checkout') {
         node {
           cleanWs()
@@ -28,7 +29,7 @@
       stage('Test'){
           sh 'echo "Helo"'
       }
-
+}
   // }
   // catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   //   currentBuild.result = 'ABORTED'
