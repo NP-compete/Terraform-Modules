@@ -29,8 +29,15 @@ node {
       stage('2. Setup Terraform'){
           sh 'rm -rf tfenv/'
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
-          sh './tfenv/bin/tfenv install min-required'
-          sh './tfenv/bin/tfenv use min-required'
+          sh 'echo "export PATH="$(pwd)/tfenv/bin:$PATH"" >> ~/.bash_profile'
+          sh 'tfenv install min-required'
+          sh 'tfenv use min-required'
+          // sh 'alias terraform=""'
+      }
+      stage('3. Setup Workspace') {
+        steps {
+          // sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+        }
       }
       stage('Clean up'){
           sh './tfenv/bin/tfenv uninstall latest'
