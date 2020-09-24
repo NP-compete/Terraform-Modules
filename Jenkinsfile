@@ -31,9 +31,8 @@ node {
           rm -rf ~/.tfenv/
           rm -rf $HOME/.local/bin/
           git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-          mkdir -p ~/.local/bin/
-          . ~/.profile
-          ln -s ~/.tfenv/bin/* ~/.local/bin
+          echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile
+          . ~/.bash_profile
           tfenv install min-required
           tfenv use min-required
         """
