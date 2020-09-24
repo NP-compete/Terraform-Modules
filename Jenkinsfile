@@ -21,7 +21,9 @@ pipeline {
   // try{
     stages {
       stage('Test'){
-        echo "Hello"
+        steps{
+          echo "Hello"
+        }
       }
     }
   // }
