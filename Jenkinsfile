@@ -24,7 +24,7 @@ pipeline {
         steps {
           cleanWs()
           checkout scm
-          sh "echo 'export OLDPATH="$PATH"' >> ~/.bash_profile"
+          // sh "echo 'export OLDPATH="$PATH"' >> ~/.bash_profile"
         }
       }
       stage('2. Setup Terraform') {
