@@ -59,7 +59,7 @@ pipeline {
         }
         steps {
           sh 'go get -u github.com/liamg/tfsec/cmd/tfsec'
-          tfsec . --tfvars-file env/${environment}.tfvars
+          sh 'tfsec . --tfvars-file env/${environment}.tfvars'
         }
       }
       stage('7. Terraform lint') {
