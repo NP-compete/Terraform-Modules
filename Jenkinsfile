@@ -27,28 +27,32 @@ pipeline {
         }
       }
       stage('2. Setup Terraform') {
-        sh """  
-          rm -rf ~/.tfenv/
-          rm -rf $HOME/.local/bin/
-          git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-          echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile
-          . ~/.bash_profile
-          tfenv install min-required
-          tfenv use min-required
-          terraform -version
-        """
+        steps {
+          sh """  
+            rm -rf ~/.tfenv/
+            rm -rf $HOME/.local/bin/
+            git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+            echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile
+            . ~/.bash_profile
+            tfenv install min-required
+            tfenv use min-required
+            terraform -version
+          """
+        }
       }
       stage('3. Setup Workspace') {
         steps {
-          // sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+          sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
         }
       }
       stage('Clean up'){
-        sh """  
-          tfenv uninstall latest
-          rm -rf ~/.tfenv/
-          rm -rf $HOME/.local/bin/
-        """
+        steps {
+          sh """  
+            tfenv uninstall latest
+            rm -rf ~/.tfenv/
+            rm -rf $HOME/.local/bin/
+          """
+        }
       }
   }
   // }
