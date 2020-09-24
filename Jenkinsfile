@@ -24,6 +24,7 @@ pipeline {
         steps {
           cleanWs()
           checkout scm
+          sh "echo 'export OLDPATH="$PATH"' >> ~/.bash_profile"
         }
       }
       stage('2. Setup Terraform') {
@@ -36,7 +37,8 @@ pipeline {
             . ~/.bash_profile
             tfenv install min-required
             tfenv use min-required
-            terraform -version
+            echo 'export PATH="$(which terraform):$PATH"' >> ~/.bash_profile
+            . ~/.bash_profile
           """
         }
       }
