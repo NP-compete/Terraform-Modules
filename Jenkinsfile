@@ -21,7 +21,7 @@ pipeline {
       stage('1. Get Infrastructure repository') {
         steps {
           cleanWs()
-          rm -rf ~/.tfenv
+          sh 'rm -rf ~/.tfenv'
           checkout scm
         }
       }
