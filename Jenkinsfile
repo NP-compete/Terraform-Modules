@@ -35,6 +35,7 @@ node {
           . ~/.bash_profile
           tfenv install min-required
           tfenv use min-required
+          terraform -version
         """
       }
       stage('3. Setup Workspace') {
@@ -43,9 +44,11 @@ node {
         }
       }
       stage('Clean up'){
-          sh 'rm -rf ~/.tfenv/'
-          sh './tfenv/bin/tfenv uninstall latest'
-          sh 'rm -rf $HOME/.local/bin/'
+        sh """  
+          tfenv uninstall latest
+          rm -rf ~/.tfenv/
+          rm -rf $HOME/.local/bin/
+        """
       }
 }
   // }
