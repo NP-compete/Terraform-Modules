@@ -10,19 +10,19 @@ pipeline {
         booleanParam(name: 'StaticAnalysis', defaultValue: false, description: 'Run static code analysis?')
   }
 
-  // environment {
-  //     AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-  //     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-  //     TF_IN_AUTOMATION      = '1'
-  //     FOR_SEQUENTIAL        = '1'
-  // }
+  environment {
+      AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+      AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+      TF_IN_AUTOMATION      = '1'
+      FOR_SEQUENTIAL        = '1'
+  }
 
   stages {
       stage('1. Get Infrastructure repository') {
         steps {
           cleanWs()
+          rm -rf ~/.tfenv
           checkout scm
-          // sh "echo 'export OLDPATH="$PATH"' >> ~/.bash_profile"
         }
       }
       stage('2. Setup Terraform') {
