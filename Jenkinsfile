@@ -73,9 +73,6 @@ pipeline {
         }
       }
       stage('6. Perform static Analysis') {
-        when {
-          environment name: 'StaticAnalysis', value: true
-        }
         steps {
           script {
             if (params.StaticAnalysis.toBoolean() == true) {
