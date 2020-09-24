@@ -31,7 +31,8 @@ pipeline {
         steps {
           sh """  
             rm -rf ~/.tfenv/
-            rm -rf $HOME/.local/bin/
+            sudo rm -rf /usr/local/bin/terraform
+            sudo rm -rf /usr/local/bin/tfenv
             git clone https://github.com/tfutils/tfenv.git ~/.tfenv
             sudo ln -s ~/.tfenv/bin/terraform /usr/local/bin
             sudo ln -s ~/.tfenv/bin/tfenv /usr/local/bin
@@ -52,7 +53,6 @@ pipeline {
           sh """  
             tfenv uninstall latest
             rm -rf ~/.tfenv/
-            sudo rm -rf $HOME/.local/bin/
             sudo rm -rf /usr/local/bin/terraform
             sudo rm -rf /usr/local/bin/tfenv
           """
