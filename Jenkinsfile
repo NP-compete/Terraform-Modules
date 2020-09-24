@@ -42,7 +42,7 @@ pipeline {
       }
       stage('3. Setup Workspace') {
         steps {
-          sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+          sh 'terraform workspace select dev || terraform workspace new dev'
         }
       }
       stage('Clean up'){
