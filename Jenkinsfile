@@ -78,13 +78,13 @@ pipeline {
       stage('9. Terraform Cost Estimate') {
         steps {
           sh 'curl -sLO https://raw.githubusercontent.com/antonbabenko/terraform-cost-estimation/master/terraform.jq'
-          terraform plan -out=plan.tfplan > /dev/null && terraform show -json plan.tfplan | jq -cf terraform.jq | curl -s -X POST -H "Content-Type: application/json" -d @- https://cost.modules.tf/
+          sh 'terraform plan -out=plan.tfplan > /dev/null && terraform show -json plan.tfplan | jq -cf terraform.jq | curl -s -X POST -H "Content-Type: application/json" -d @- https://cost.modules.tf/'
         }
       }
       stage('10. Terraform apply') {
         steps {
           sh 'curl -L "$(curl -Ls https://api.github.com/repos/cloudposse/tfmask/releases/latest | grep -o -E "https://.+?_linux_amd64")" -o tfmask.zip && unzip tfmask.zip && rm tfmask.zip'
-          terraform apply --var-file env/${environment}.tfvars --auto-approve | tfmask
+          sh 'terraform apply --var-file env/${environment}.tfvars --auto-approve | tfmask'
         }
       }
       stage('11. Clean up') {
