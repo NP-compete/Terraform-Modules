@@ -30,7 +30,7 @@ pipeline {
       }
       stage('2. Setup Terraform') {
         steps {
-          git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+          sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
           sh 'mkdir -p ~/.local/bin/'
           sh '. ~/.profile'
           sh 'ln -s ~/.tfenv/bin/* ~/.local/bin/'
