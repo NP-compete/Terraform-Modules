@@ -22,6 +22,8 @@ pipeline {
         steps {
           cleanWs()
           sh 'rm -rf ~/.tfenv'
+          sh 'sudo rm -rf /usr/local/bin/terraform'
+          sh 'sudo rm -rf /usr/local/bin/tfenv'
           checkout scm
         }
       }
