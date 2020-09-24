@@ -21,13 +21,13 @@ pipeline {
 
   // try{
     stages {
-      // stage('1. Get Infrastructure repository') {
-      //   steps {
-      //     sh 'rm -rf wd || true'
-      //     git clone ${RepoURL} wd
-      //     cd  wd
-      //   }
-      // }
+      stage('1. Get Infrastructure repository') {
+        steps {
+          sh 'rm -rf wd || true'
+          git clone ${RepoURL} wd
+          cd  wd
+        }
+      }
       // stage('2. Setup Terraform') {
       //   steps {
       //     sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
