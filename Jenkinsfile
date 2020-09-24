@@ -27,7 +27,7 @@ node {
         }
       }
       stage('Test'){
-          sh 'echo "Helo"'
+          sh 'ls -la'
       }
 }
   // }
