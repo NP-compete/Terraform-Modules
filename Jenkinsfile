@@ -27,7 +27,7 @@ node {
         }
       }
       stage('2. Setup Terraform'){
-          sh 'rm tfenv'
+          sh 'rm -rf tfenv/'
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh 'export PATH=$PATH:$(pwd)/tfenv/bin/'
           sh './tfenv/bin/tfenv list-remote'
