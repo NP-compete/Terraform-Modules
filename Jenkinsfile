@@ -37,7 +37,7 @@ pipeline {
             . ~/.bash_profile
             tfenv install min-required
             tfenv use min-required
-            echo 'export PATH="$(which terraform):$PATH"' >> ~/.bash_profile
+            echo 'export PATH="\$(which terraform):$PATH"' >> ~/.bash_profile
             . ~/.bash_profile
           """
         }
