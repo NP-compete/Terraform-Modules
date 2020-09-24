@@ -27,7 +27,12 @@ node {
         }
       }
       stage('2. Setup Terraform'){
-          ls -la
+          sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
+          sh 'mkdir -p ~/.local/bin/'
+          sh '. ~/.profile'
+          sh 'ln -s ~/.tfenv/bin/* ~/.local/bin/'
+          sh 'which tfenv'
+          sh 'tfenv install min-required'
       }
 }
   // }
