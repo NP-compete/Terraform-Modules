@@ -37,15 +37,13 @@ pipeline {
             . ~/.bash_profile
             tfenv install min-required
             tfenv use min-required
-            echo 'export PATH="\$(which terraform):$PATH"' >> ~/.bash_profile
-            . ~/.bash_profile
+            terraform workspace select dev || terraform workspace new dev
           """
         }
       }
       stage('3. Setup Workspace') {
         steps {
-          sh 'terraform -version'
-          sh 'terraform workspace select dev || terraform workspace new dev'
+          sh 'echo "GM"'
         }
       }
       stage('Clean up'){
