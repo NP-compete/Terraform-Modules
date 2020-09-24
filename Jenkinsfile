@@ -72,7 +72,7 @@ pipeline {
         steps {
           sh 'go get -u github.com/dmlittle/scenery'
           sh 'curl -L "$(curl -Ls https://api.github.com/repos/cloudposse/tfmask/releases/latest | grep -o -E "https://.+?_linux_amd64")" -o tfmask.zip && unzip tfmask.zip && rm tfmask.zip'
-          terraform plan --var-file env/${environment}.tfvars | scenery | tfmask
+          sh 'terraform plan --var-file env/${environment}.tfvars | scenery | tfmask'
         }
       }
       stage('9. Terraform Cost Estimate') {
