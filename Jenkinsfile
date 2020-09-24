@@ -2,12 +2,12 @@ pipeline {
   agent any
 
   parameters {
-        string(name: 'environment', defaultValue: 'dev', description: 'Workspace/environment file to use for deployment')
+        choice(name: 'environment', choices: ['dev', 'sys', 'prod'], description: 'Workspace/environment file to use for deployment')
         string(name: 'StateBucket', defaultValue: '', description: 'Bucket to use to store tfstate')
         string(name: 'StateLock', defaultValue: '', description: 'DynamoDB table to use to lock tfstate')
         string(name: 'Project', defaultValue: '', description: 'Project Name')
-        string(name: 'Region', defaultValue: 'us-east-1', description: 'The AWS Region')
-        string(name: 'Backend', defaultValue: 'local', description: 'The backend to use with terraform')
+        choice(name: 'Region', choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], description: 'The AWS Region')
+        choice(name: 'Backend', choices: ['local', 's3'], description: 'The backend to use with terraform')
         booleanParam(name: 'StaticAnalysis', defaultValue: false, description: 'Run static code analysis?')
   }
 
@@ -66,7 +66,6 @@ pipeline {
         }
         steps {
           sh 'terraform init -input=false'
-          sh 'ls -la'
         }
       }
       // stage('5. Validate Terraform code') {
