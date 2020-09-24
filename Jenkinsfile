@@ -42,6 +42,7 @@ pipeline {
       }
       stage('3. Setup Workspace') {
         steps {
+          sh 'terraform -version'
           sh 'terraform workspace select dev || terraform workspace new dev'
         }
       }
