@@ -19,25 +19,25 @@ pipeline {
       FOR_SEQUENTIAL        = '1'
   }
 
-  try{
+  // try{
     stages {
-      stage('1. Get Infrastructure repository') {
-        steps {
-          sh 'rm -rf wd || true'
-          git clone ${RepoURL} wd
-          cd  wd
-        }
-      }
-      stage('2. Setup Terraform') {
-        steps {
-          sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
-          sh 'mkdir -p ~/.local/bin/'
-          sh '. ~/.profile'
-          sh 'ln -s ~/.tfenv/bin/* ~/.local/bin/'
-          sh 'which tfenv'
-          sh 'tfenv install min-required'
-        }
-      }
+      // stage('1. Get Infrastructure repository') {
+      //   steps {
+      //     sh 'rm -rf wd || true'
+      //     git clone ${RepoURL} wd
+      //     cd  wd
+      //   }
+      // }
+      // stage('2. Setup Terraform') {
+      //   steps {
+      //     sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
+      //     sh 'mkdir -p ~/.local/bin/'
+      //     sh '. ~/.profile'
+      //     sh 'ln -s ~/.tfenv/bin/* ~/.local/bin/'
+      //     sh 'which tfenv'
+      //     sh 'tfenv install min-required'
+      //   }
+      // }
       stage('3. Setup Workspace') {
         steps {
           sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
@@ -95,17 +95,17 @@ pipeline {
         }
       }
     }
-  }
-  catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
-    currentBuild.result = 'ABORTED'
-  }
-  catch (err) {
-    currentBuild.result = 'FAILURE'
-    throw err
-  }
-  finally {
-    if (currentBuild.result == 'SUCCESS') {
-      currentBuild.result = 'SUCCESS'
-    }
-  }
+  // }
+  // catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
+  //   currentBuild.result = 'ABORTED'
+  // }
+  // catch (err) {
+  //   currentBuild.result = 'FAILURE'
+  //   throw err
+  // }
+  // finally {
+  //   if (currentBuild.result == 'SUCCESS') {
+  //     currentBuild.result = 'SUCCESS'
+  //   }
+  // }
 }
