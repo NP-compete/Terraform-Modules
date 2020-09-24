@@ -12,8 +12,6 @@ pipeline {
   }
 
   environment {
-      // AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-      // AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
       TF_IN_AUTOMATION      = '1'
       FOR_SEQUENTIAL        = '1'
   }
@@ -68,12 +66,12 @@ pipeline {
           sh 'terraform init -input=false'
         }
       }
-      // stage('5. Validate Terraform code') {
-      //   steps {
+      stage('5. Validate Terraform code') {
+        steps {
           
-      //     sh 'terraform validate'
-      //   }
-      // }
+          sh 'terraform validate'
+        }
+      }
       // stage('6. Perform static Analysis') {
         // when {
         //   environment name: 'StaticAnalysis', value: true
