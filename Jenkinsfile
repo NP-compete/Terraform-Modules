@@ -33,8 +33,8 @@ pipeline {
             rm -rf ~/.tfenv/
             rm -rf $HOME/.local/bin/
             git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-            echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile
-            . ~/.bash_profile
+            echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
+            . ~/.bashrc
             tfenv install min-required
             tfenv use min-required
             terraform workspace select dev || terraform workspace new dev
@@ -44,6 +44,7 @@ pipeline {
       stage('3. Setup Workspace') {
         steps {
           sh 'echo $PATH'
+          sh 'terraform workspace select dev || terraform workspace new dev'
         }
       }
       stage('Clean up'){
