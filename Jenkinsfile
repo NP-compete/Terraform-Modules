@@ -30,6 +30,7 @@ node {
           sh 'rm -rf tfenv/'
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh 'echo "export PATH="$(pwd)/tfenv/bin:$PATH"" >> ~/.bash_profile'
+          sh 'source ~/.bash_profile'
           sh 'tfenv install min-required'
           sh 'tfenv use min-required'
           // sh 'alias terraform=""'
