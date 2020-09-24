@@ -19,6 +19,15 @@ pipeline {
   }
 
   stages {
+      stage('PRE Clean up'){
+        steps {
+          sh """
+            rm -rf ~/.tfenv/
+            sudo rm -rf /usr/local/bin/terraform
+            sudo rm -rf /usr/local/bin/tfenv
+          """
+        }
+      }
       stage('1. Get Infrastructure repository') {
         steps {
           cleanWs()
@@ -99,7 +108,7 @@ pipeline {
       //     sh 'terraform apply --var-file env/${environment}.tfvars --auto-approve | tfmask'
       //   }
       // }
-      stage('Clean up'){
+      stage('POST Clean up'){
         steps {
           sh """  
             tfenv uninstall latest
