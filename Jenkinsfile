@@ -77,8 +77,10 @@ pipeline {
           environment name: 'StaticAnalysis', value: true
         }
         steps {
-          sh 'go get -u github.com/liamg/tfsec/cmd/tfsec'
-          sh 'tfsec . --tfvars-file env/${environment}.tfvars'
+          if (params.StaticAnalysis) {
+            sh 'go get -u github.com/liamg/tfsec/cmd/tfsec'
+            sh 'tfsec . --tfvars-file env/${environment}.tfvars'
+          }
         }
       }
       // stage('7. Terraform lint') {
