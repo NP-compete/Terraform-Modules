@@ -52,9 +52,9 @@ pipeline {
           sh """  
             tfenv uninstall latest
             rm -rf ~/.tfenv/
-            rm -rf $HOME/.local/bin/
-            rm -rf /usr/local/bin/terraform
-            rm -rf /usr/local/bin/tfenv
+            sudo rm -rf $HOME/.local/bin/
+            sudo rm -rf /usr/local/bin/terraform
+            sudo rm -rf /usr/local/bin/tfenv
           """
         }
       }
