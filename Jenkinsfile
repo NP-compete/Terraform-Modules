@@ -28,6 +28,7 @@ node {
       }
       stage('2. Setup Terraform') {
           sh 'rm -rf tfenv/'
+          sh 'rm -rf $HOME/.local/bin/'
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh 'echo "export PATH="$(pwd)/tfenv/bin:$PATH"" >> $HOME/.profile'
           sh 'mkdir -p $HOME/.local/bin/'
@@ -42,7 +43,9 @@ node {
         }
       }
       stage('Clean up'){
+          sh 'rm -rf tfenv/'
           sh './tfenv/bin/tfenv uninstall latest'
+          sh 'rm -rf $HOME/.local/bin/'
       }
 }
   // }
