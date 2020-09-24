@@ -90,7 +90,7 @@ pipeline {
       stage('11. Clean up') {
         steps {
           sh 'rm -rf ~/.tfenv'
-          cd ..
+          sh 'cd ..'
           sh 'rm -rf wd'
         }
       }
