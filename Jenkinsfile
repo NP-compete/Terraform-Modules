@@ -21,7 +21,7 @@ pipeline {
   // try{
   stages {
       stage('1. Get Infrastructure repository') {
-        node {
+        steps {
           cleanWs()
           checkout scm
         }
