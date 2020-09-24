@@ -20,14 +20,14 @@
 
   // try{
 node {
-      stage('checkout') {
+      stage('1. Get Infrastructure repository') {
         node {
           cleanWs()
           checkout scm
         }
       }
-      stage('Test'){
-          sh 'ls -la'
+      stage('2. Setup Terraform'){
+          ls -la
       }
 }
   // }
