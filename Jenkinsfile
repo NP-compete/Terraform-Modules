@@ -20,6 +20,12 @@ pipeline {
 
   // try{
     stages {
+      stage('checkout') {
+        node {
+          cleanWs()
+          checkout scm
+        }
+      }
       stage('Test'){
         steps{
           echo "Hello"
