@@ -33,8 +33,8 @@ pipeline {
             rm -rf ~/.tfenv/
             rm -rf $HOME/.local/bin/
             git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-            ln -s ~/.tfenv/bin/terraform /usr/local/bin
-            ln -s ~/.tfenv/bin/tfenv /usr/local/bin
+            sudo ln -s ~/.tfenv/bin/terraform /usr/local/bin
+            sudo ln -s ~/.tfenv/bin/tfenv /usr/local/bin
             tfenv install min-required
             tfenv use min-required
             terraform workspace select dev || terraform workspace new dev
@@ -53,6 +53,8 @@ pipeline {
             tfenv uninstall latest
             rm -rf ~/.tfenv/
             rm -rf $HOME/.local/bin/
+            rm -rf /usr/local/bin/terraform
+            rm -rf /usr/local/bin/tfenv
           """
         }
       }
