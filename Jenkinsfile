@@ -19,8 +19,8 @@ pipeline {
       FOR_SEQUENTIAL        = '1'
   }
 
-  stages {
-    try{
+  try{
+    stages {
       stage('1. Get Infrastructure repository') {
         steps {
           sh 'rm -rf wd || true'
@@ -95,17 +95,17 @@ pipeline {
         }
       }
     }
-    catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
-      currentBuild.result = 'ABORTED'
-    }
-    catch (err) {
-      currentBuild.result = 'FAILURE'
-      throw err
-    }
-    finally {
-      if (currentBuild.result == 'SUCCESS') {
-        currentBuild.result = 'SUCCESS'
-      }
+  }
+  catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
+    currentBuild.result = 'ABORTED'
+  }
+  catch (err) {
+    currentBuild.result = 'FAILURE'
+    throw err
+  }
+  finally {
+    if (currentBuild.result == 'SUCCESS') {
+      currentBuild.result = 'SUCCESS'
     }
   }
 }
