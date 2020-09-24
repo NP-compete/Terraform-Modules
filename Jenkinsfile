@@ -26,16 +26,15 @@ node {
           checkout scm
         }
       }
-      stage('2. Setup Terraform'){
+      stage('2. Setup Terraform') {
           sh 'rm -rf tfenv/'
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
-          sh 'echo "export PATH="$(pwd)/tfenv/bin:$PATH"" >> ~/.bash_profile'
-          sh 'mkdir -p ~/.local/bin/'
-          sh 'ln -s tfenv/bin/* ~/.local/bin'
-          sh '. ~/.profile'
+          sh 'echo "export PATH="$(pwd)/tfenv/bin:$PATH"" >> $HOME/.profile'
+          sh 'mkdir -p $HOME/.local/bin/'
+          sh 'ln -s tfenv/bin/* $HOME/.local/bin'
+          sh '. $HOME/.profile'
           sh 'tfenv install min-required'
           sh 'tfenv use min-required'
-          // sh 'alias terraform=""'
       }
       stage('3. Setup Workspace') {
         steps {
