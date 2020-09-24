@@ -1,5 +1,5 @@
-pipeline {
-  agent any
+// pipeline {
+//   agent any
 
   // parameters {
   //       string(name: 'environment', defaultValue: 'dev', description: 'Workspace/environment file to use for deployment')
@@ -44,4 +44,4 @@ pipeline {
   //     currentBuild.result = 'SUCCESS'
   //   }
   // }
-}
+// }
