@@ -26,9 +26,7 @@
         }
       }
       stage('Test'){
-        steps{
-          echo "Hello"
-        }
+          sh 'echo "Helo"'
       }
 
   // }
