@@ -43,7 +43,7 @@ pipeline {
       }
       stage('3. Setup Workspace') {
         steps {
-          sh 'echo "GM"'
+          sh 'echo $PATH'
         }
       }
       stage('Clean up'){
