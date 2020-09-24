@@ -31,6 +31,8 @@ node {
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh './tfenv/bin/tfenv install min-required'
           sh './tfenv/bin/tfenv use min-required'
+      }
+      stage('Clean up'){
           sh './tfenv/bin/tfenv uninstall latest'
       }
 }
