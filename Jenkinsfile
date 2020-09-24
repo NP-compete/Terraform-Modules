@@ -31,7 +31,7 @@ node {
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh './tfenv/bin/tfenv install min-required'
           sh './tfenv/bin/tfenv use min-required'
-          sh './tfenv/bin/tfenv uninstall min-required'
+          sh './tfenv/bin/tfenv uninstall latest'
       }
 }
   // }
