@@ -66,6 +66,7 @@ pipeline {
         }
         steps {
           sh 'terraform init -input=false'
+          sh 'ls -la'
         }
       }
       // stage('5. Validate Terraform code') {
