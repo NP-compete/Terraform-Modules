@@ -29,7 +29,7 @@ node {
       stage('2. Setup Terraform'){
           sh 'git clone https://github.com/tfutils/tfenv.git tfenv'
           sh 'export PATH=$PATH:$(pwd)/tfenv/bin/'
-          sh 'which tfenv'
+          sh './tfenv/bin/tfenv list-remote'
           // sh 'tfenv install min-required'
       }
 }
