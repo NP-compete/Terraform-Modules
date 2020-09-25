@@ -77,7 +77,7 @@ pipeline {
           script {
             if (params.StaticAnalysis.toBoolean() == true) {
               sh """
-                sudo apt-get install golang -y
+                curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
                 go get -u github.com/liamg/tfsec/cmd/tfsec
                 tfsec . --tfvars-file env/${environment}.tfvars
               """
@@ -90,7 +90,6 @@ pipeline {
         steps {
           script {
             sh """
-              curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
               curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip
               tflint
             """
