@@ -76,19 +76,21 @@ pipeline {
         steps {
           script {
             if (params.StaticAnalysis.toBoolean() == true) {
-              sh 'go get -u github.com/liamg/tfsec/cmd/tfsec'
-              sh 'tfsec . --tfvars-file env/${environment}.tfvars'
+              sh """
+                sudo apt-get install golang -y
+                go get -u github.com/liamg/tfsec/cmd/tfsec
+                tfsec . --tfvars-file env/${environment}.tfvars
+              """
             }
           }
           
         }
       }
-      // stage('7. Terraform lint') {
-      //   steps {
-      //     sh 'curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip'
-      //     tflint
-      //   }
-      // }
+      stage('7. Terraform lint') {
+        steps {
+          sh "echo "test""
+        }
+      }
       // stage('8. Terraform plan') {
       //   steps {
       //     sh 'go get -u github.com/dmlittle/scenery'
