@@ -88,7 +88,13 @@ pipeline {
       }
       stage('7. Terraform lint') {
         steps {
-          sh "echo "test""
+          script {
+            sh """
+              curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
+              curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip
+              tflint
+            """
+          }
         }
       }
       // stage('8. Terraform plan') {
