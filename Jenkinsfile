@@ -123,6 +123,7 @@ pipeline {
             rm -rf ~/.tfenv/
             sudo rm -rf /usr/local/bin/terraform
             sudo rm -rf /usr/local/bin/tfenv
+            rm -rf ~/.go
           """
         }
       }
