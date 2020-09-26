@@ -40,6 +40,7 @@ pipeline {
             sudo ln -s ~/.tfenv/bin/tfenv /usr/local/bin
             tfenv install min-required
             tfenv use min-required
+            // curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
           """
         }
       }
@@ -74,7 +75,6 @@ pipeline {
       stage('6. Perform static Analysis') {
         steps {
           sh """
-            curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
             go get -u github.com/liamg/tfsec/cmd/tfsec
             tfsec . --tfvars-file env/${environment}.tfvars
           """
