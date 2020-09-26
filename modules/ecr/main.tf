@@ -10,6 +10,11 @@ resource "aws_ecr_repository" "this" {
   timeouts {
     delete = var.delete_timeout
   }
+
+  encryption_configuration {
+    encryption_type = "KMS"
+    kms_key         = var.kms_arn
+  }
 }
 
 resource "aws_ecr_lifecycle_policy" "this" {

@@ -5,7 +5,7 @@ resource "aws_cloudwatch_log_group" "logs" {
 }
 
 resource "aws_cloudwatch_log_stream" "log_stream" {
-  name = "/ecs/fargate//${var.app}-${var.environment}-log-stream"
+  name           = "/ecs/fargate//${var.app}-${var.environment}-log-stream"
   log_group_name = aws_cloudwatch_log_group.logs.name
 }
 
@@ -24,7 +24,7 @@ EOF
 
 # cw event rule
 resource "aws_cloudwatch_event_rule" "ecs_event_stream" {
-  count = var.create_cluster ? 1 : 0
+  count       = var.create_cluster ? 1 : 0
   name        = "${var.app}-${var.environment}-ecs-event-stream"
   description = "Passes ecs event logs for ${var.app}-${var.environment} to a lambda that writes them to cw logs"
 
@@ -41,8 +41,8 @@ PATTERN
 
 resource "aws_cloudwatch_event_target" "ecs_event_stream" {
   count = var.create_cluster ? 1 : 0
-  rule = aws_cloudwatch_event_rule.ecs_event_stream[0].name
-  arn  = aws_lambda_function.ecs_event_stream[0].arn
+  rule  = aws_cloudwatch_event_rule.ecs_event_stream[0].name
+  arn   = aws_lambda_function.ecs_event_stream[0].arn
 }
 
 data "template_file" "lambda_source" {
@@ -62,7 +62,7 @@ data "archive_file" "lambda_zip" {
 }
 
 resource "aws_lambda_permission" "ecs_event_stream" {
-  count = var.create_cluster ? 1 : 0
+  count         = var.create_cluster ? 1 : 0
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.ecs_event_stream[0].arn
@@ -71,7 +71,7 @@ resource "aws_lambda_permission" "ecs_event_stream" {
 }
 
 resource "aws_lambda_function" "ecs_event_stream" {
-  count = var.create_cluster ? 1 : 0
+  count            = var.create_cluster ? 1 : 0
   function_name    = "${var.app}-${var.environment}-ecs-event-stream"
   role             = var.create_role ? aws_iam_role.ecs_event_stream[0].arn : var.app_role
   filename         = data.archive_file.lambda_zip.output_path
@@ -82,7 +82,7 @@ resource "aws_lambda_function" "ecs_event_stream" {
 }
 
 resource "aws_lambda_alias" "ecs_event_stream" {
-  count = var.create_cluster ? 1 : 0
+  count            = var.create_cluster ? 1 : 0
   name             = aws_lambda_function.ecs_event_stream[0].function_name
   description      = "latest"
   function_name    = aws_lambda_function.ecs_event_stream[0].function_name

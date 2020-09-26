@@ -138,7 +138,7 @@ variable "deregistration_delay" {
 
 # The path to the health check for the load balancer to know if the container(s) are ready
 variable "health_check" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -179,72 +179,72 @@ variable "https_port" {
 # 
 variable "certificate_arn" {
   description = "The ARN for the SSL certificate"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "create_service" {
   description = "Boolean to create service"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "create_cluster" {
   description = "Boolean to create cluster"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "create_role" {
   description = "Boolean to create roles"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "app_role" {
-  type = string
+  type        = string
   description = "An application role that the container/task runs as"
-  default = ""
+  default     = ""
 }
 
 variable "ecsTaskExecutionRole" {
-  type = string
+  type        = string
   description = "The ECS task execution role"
-  default = ""
+  default     = ""
 }
 
 variable "notify" {
-  type = list(string)
+  type        = list(string)
   description = "A list of SNS ARN's to notify in case of an alarm"
-  default = []
+  default     = []
 }
 
 variable "memory_utilization_high_threshold" {
-  type = number
+  type    = number
   default = 80
 }
 
 variable "memory_utilization_low_threshold" {
-  type = number
+  type    = number
   default = 20
 }
 
 variable "cpu_reservation_high_threshold" {
-  type = number
+  type    = number
   default = 80
 }
 
 variable "cpu_reservation_low_threshold" {
-  type = number
+  type    = number
   default = 20
 }
 
 variable "memory_reservation_high_threshold" {
-  type = number
+  type    = number
   default = 80
 }
 
 variable "memory_reservation_low_threshold" {
-  type = number
+  type    = number
   default = 20
 }

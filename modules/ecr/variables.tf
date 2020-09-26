@@ -53,3 +53,8 @@ variable "sns_notify" {
   description = "SNS Topic ARN to notify in case of exceeded callcount"
   type        = list(string)
 }
+
+variable "kms_arn" {
+  description = "The ARN of the KMS key to encrypt"
+  type        = string
+}

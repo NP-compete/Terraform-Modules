@@ -55,12 +55,12 @@ variable "is_organization_trail" {
 }
 
 variable "cloudtrail_name" {
-  type = string
+  type        = string
   description = "Name of cloudtrail trail"
 }
 
 variable "cloudwatchLogGroupName" {
-  type = string
+  type        = string
   description = "The name of cloudwatch log group where cloudtrail sends logs to"
 }
 

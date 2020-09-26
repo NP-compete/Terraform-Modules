@@ -497,19 +497,19 @@ variable "values" {
 }
 
 variable "create_role" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Boolean to decide if roles will be created by terraform"
 }
 
 variable "cloudwatchRole" {
-  type = string
+  type        = string
   description = "Role to enable logging in API Gateway account settings"
-  default = ""
+  default     = ""
 }
 
 variable "tags" {
-  type = map
+  type        = map
   description = "Yags for the resources"
-  default = {}
+  default     = {}
 }

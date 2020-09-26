@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudwatch_metric_alarm" "latency95" {
-  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+  count               = length(var.path_parts) > 0 ? length(var.path_parts) : 0
   alarm_name          = "${aws_api_gateway_resource.default.*.id[count.index]} : Latency p95 > 1000"
   alarm_description   = "Latency p95 > 1000"
   comparison_operator = "GreaterThanThreshold"
@@ -26,7 +26,7 @@ resource "aws_cloudwatch_metric_alarm" "latency95" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "latency99" {
-  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+  count               = length(var.path_parts) > 0 ? length(var.path_parts) : 0
   alarm_name          = "${aws_api_gateway_resource.default.*.id[count.index]} : Latency p99 > 1000"
   alarm_description   = "Latency p99 > 1000"
   comparison_operator = "GreaterThanThreshold"
@@ -53,7 +53,7 @@ resource "aws_cloudwatch_metric_alarm" "latency99" {
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudwatch_metric_alarm" "fourRate" {
-  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+  count                     = length(var.path_parts) > 0 ? length(var.path_parts) : 0
   alarm_name                = "${aws_api_gateway_resource.default.*.id[count.index]} : 4XX"
   alarm_description         = "4xx errors"
   comparison_operator       = "GreaterThanThreshold"
@@ -122,7 +122,7 @@ resource "aws_cloudwatch_metric_alarm" "fourRate" {
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudwatch_metric_alarm" "fiveRate" {
-  count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
+  count                     = length(var.path_parts) > 0 ? length(var.path_parts) : 0
   alarm_name                = "${aws_api_gateway_resource.default.*.id[count.index]} : 5xx"
   alarm_description         = "5xx Errors"
   comparison_operator       = "GreaterThanThreshold"

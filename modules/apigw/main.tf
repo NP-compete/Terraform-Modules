@@ -215,11 +215,11 @@ resource "aws_api_gateway_authorizer" "default" {
 }
 
 resource "aws_api_gateway_gateway_response" "default" {
-  count         = var.gateway_response_count > 0 ? var.gateway_response_count : 0
-  rest_api_id   = aws_api_gateway_rest_api.default.*.id[0]
-  response_type = element(var.response_types, count.index)
-  status_code   = length(var.gateway_status_codes) > 0 ? element(var.gateway_status_codes, count.index) : ""
-  response_templates = length(var.gateway_response_templates) > 0 ? element(var.gateway_response_templates, count.index) : {}
+  count               = var.gateway_response_count > 0 ? var.gateway_response_count : 0
+  rest_api_id         = aws_api_gateway_rest_api.default.*.id[0]
+  response_type       = element(var.response_types, count.index)
+  status_code         = length(var.gateway_status_codes) > 0 ? element(var.gateway_status_codes, count.index) : ""
+  response_templates  = length(var.gateway_response_templates) > 0 ? element(var.gateway_response_templates, count.index) : {}
   response_parameters = length(var.gateway_response_parameters) > 0 ? element(var.gateway_response_parameters, count.index) : {}
 }
 

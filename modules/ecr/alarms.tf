@@ -11,10 +11,10 @@ resource "aws_cloudwatch_metric_alarm" "callcount_alert" {
   datapoints_to_alarm = "1"
 
   dimensions = {
-    Class  = "None",
+    Class    = "None",
     Resource = "BatchGetImage",
     Service  = "ECR",
-    Type  =  "API"
+    Type     = "API"
   }
 
   alarm_description = format(var.repo_name, "INFO", "CallCount > 5")

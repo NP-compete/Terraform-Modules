@@ -1,6 +1,6 @@
 resource "aws_ecs_cluster" "app" {
   count = var.create_cluster ? 1 : 0
-  name = "${var.app}-${var.environment}"
+  name  = "${var.app}-${var.environment}"
   setting {
     name  = "containerInsights"
     value = "enabled"
@@ -9,7 +9,7 @@ resource "aws_ecs_cluster" "app" {
 }
 
 resource "aws_appautoscaling_target" "app_scale_target" {
-  count = var.create_service ? 1 : 0
+  count              = var.create_service ? 1 : 0
   service_namespace  = "ecs"
   resource_id        = "service/${aws_ecs_cluster.app[0].name}/${aws_ecs_service.app[0].name}"
   scalable_dimension = "ecs:service:DesiredCount"
@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "app" {
-  count = var.create_service ? 1 : 0
+  count           = var.create_service ? 1 : 0
   name            = "${var.app}-${var.environment}"
   cluster         = aws_ecs_cluster.app[count.index].id
   launch_type     = "FARGATE"

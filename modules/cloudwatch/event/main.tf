@@ -1,11 +1,9 @@
 resource "aws_cloudwatch_event_rule" "this" {
-  name        = substr(module.label.id, 0, 63)
-  is_enabled  = var.cloudwatch_event_rule_is_enabled
-  description = var.cloudwatch_event_rule_description != "" ? var.cloudwatch_event_rule_description : module.label.id
-
+  name          = substr(module.label.id, 0, 63)
+  is_enabled    = var.cloudwatch_event_rule_is_enabled
+  description   = var.cloudwatch_event_rule_description != "" ? var.cloudwatch_event_rule_description : module.label.id
   event_pattern = jsonencode(var.cloudwatch_event_rule_pattern)
-
-  tags = var.tags
+  tags          = var.tags
 }
 
 resource "aws_cloudwatch_event_target" "this" {

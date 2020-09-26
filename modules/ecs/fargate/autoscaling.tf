@@ -1,5 +1,5 @@
 resource "aws_appautoscaling_policy" "app_up" {
-  count = var.create_service ? 1 : 0
+  count              = var.create_service ? 1 : 0
   name               = "app-scale-up"
   service_namespace  = aws_appautoscaling_target.app_scale_target[0].service_namespace
   resource_id        = aws_appautoscaling_target.app_scale_target[0].resource_id
@@ -20,7 +20,7 @@ resource "aws_appautoscaling_policy" "app_up" {
 }
 
 resource "aws_appautoscaling_policy" "app_down" {
-  count = var.create_service ? 1 : 0
+  count              = var.create_service ? 1 : 0
   name               = "app-scale-down"
   service_namespace  = aws_appautoscaling_target.app_scale_target[0].service_namespace
   resource_id        = aws_appautoscaling_target.app_scale_target[0].resource_id
@@ -40,7 +40,7 @@ resource "aws_appautoscaling_policy" "app_down" {
 
 resource "aws_appautoscaling_scheduled_action" "app_autoscale_time_up" {
   count = var.create_service ? 1 : 0
-  name = "app-autoscale-time-up-${var.app}"
+  name  = "app-autoscale-time-up-${var.app}"
 
   service_namespace  = aws_appautoscaling_target.app_scale_target[0].service_namespace
   resource_id        = aws_appautoscaling_target.app_scale_target[0].resource_id
@@ -57,7 +57,7 @@ resource "aws_appautoscaling_scheduled_action" "app_autoscale_time_up" {
 # `scale_down_min_capacity` and `scale_down_max_capacity` variables.
 resource "aws_appautoscaling_scheduled_action" "app_autoscale_time_down" {
   count = var.create_service ? 1 : 0
-  name = "app-autoscale-time-down-${var.app}"
+  name  = "app-autoscale-time-down-${var.app}"
 
   service_namespace  = aws_appautoscaling_target.app_scale_target[0].service_namespace
   resource_id        = aws_appautoscaling_target.app_scale_target[0].resource_id
