@@ -68,19 +68,16 @@ pipeline {
       }
       stage('5. Validate Terraform code') {
         steps {
-          
           sh 'terraform validate'
         }
       }
       stage('6. Perform static Analysis') {
         steps {
-          script {
-            sh """
-              curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
-              go get -u github.com/liamg/tfsec/cmd/tfsec
-              tfsec . --tfvars-file env/${environment}.tfvars
-            """
-          }    
+          sh """
+            curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
+            go get -u github.com/liamg/tfsec/cmd/tfsec
+            tfsec . --tfvars-file env/${environment}.tfvars
+          """
         }
       }
       stage('7. Terraform lint') {
